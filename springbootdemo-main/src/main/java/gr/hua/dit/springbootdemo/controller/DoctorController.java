@@ -54,6 +54,7 @@ public class DoctorController {
         updateDoctor.setFirstName(doctorDetails.getFirstName());
         updateDoctor.setLastName(doctorDetails.getLastName());
         updateDoctor.setEmail(doctorDetails.getEmail());
+        updateDoctor.setSpecialty(doctorDetails.getSpecialty());
 
         //save updates
         doctorDAO.save(updateDoctor);
