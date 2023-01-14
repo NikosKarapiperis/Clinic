@@ -7,9 +7,12 @@ import gr.hua.dit.springbootdemo.entities.Doctors;
 import gr.hua.dit.springbootdemo.entities.Patient;
 import gr.hua.dit.springbootdemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 
 @CrossOrigin("*")
