@@ -77,6 +77,18 @@ public class DoctorController {
         Doctors doctors = doctorDAO.findById(did);
         return doctors.getAppointmentListDoctor();
     }
+    
+     //get doctor by id Rest API
+    @GetMapping("/{id}")
+    public ResponseEntity<Doctors> getDoctorById(@PathVariable int id){
+        Doctors doctors = doctorDAO.findById(id);
+        if(doctors==null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
+        return ResponseEntity.ok(doctors);
+    }
 
 
 }
