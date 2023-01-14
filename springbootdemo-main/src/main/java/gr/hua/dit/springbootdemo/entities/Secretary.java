@@ -33,10 +33,6 @@ public class Secretary {
     @Size(max = 50)
     private String email;
 
-    @OneToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JsonManagedReference
-    private List<Payment> paymentList;
-
     //Secretary-Appointment relationship
     @OneToMany(
             cascade = {CascadeType.DETACH, CascadeType.MERGE,
@@ -85,14 +81,6 @@ public class Secretary {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public List<Payment> getPaymentList() {
-        return paymentList;
-    }
-
-    public void setPaymentList(List<Payment> paymentList) {
-        this.paymentList = paymentList;
     }
 
     public List<Appointment> getAppointments() {
