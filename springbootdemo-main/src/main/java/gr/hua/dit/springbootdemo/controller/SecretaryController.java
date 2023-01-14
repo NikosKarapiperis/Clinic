@@ -5,9 +5,7 @@ import gr.hua.dit.springbootdemo.DAO.AppointmentDAO;
 import gr.hua.dit.springbootdemo.DAO.PatientDAO;
 import gr.hua.dit.springbootdemo.entities.Appointment;
 import gr.hua.dit.springbootdemo.entities.Patient;
-import gr.hua.dit.springbootdemo.entities.Payment;
 import gr.hua.dit.springbootdemo.entities.Secretary;
-import gr.hua.dit.springbootdemo.repository.PaymentRepository;
 import gr.hua.dit.springbootdemo.repository.SecretaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,9 +24,6 @@ public class SecretaryController {
 
     @Autowired
     private AppointmentDAO appointmentDAO;
-
-    @Autowired
-    private PaymentRepository paymentRepository;
 
 
     @PostMapping("")
@@ -61,14 +56,6 @@ public class SecretaryController {
         return appointmentDAO.findAll();
     }
 
-    //secretary complete a payment
-    @PostMapping("/getPaid")
-    @PreAuthorize("hasRole('SECRETARY')")
-    public Payment getPaid(@RequestBody Payment payment){
-        payment.setId(0);
-        paymentRepository.save(payment);
-        return payment;
-    }
 
 
 
