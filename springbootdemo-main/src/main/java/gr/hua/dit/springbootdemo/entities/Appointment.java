@@ -36,10 +36,6 @@ public class Appointment {
     @JsonBackReference
     private Patient patient;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
-
 
 
     public Appointment(){
@@ -52,15 +48,6 @@ public class Appointment {
         this.appointmentType = appointmentType;
         this.patient = patient;
 
-    }
-
-
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
     }
 
     public int getId() {
