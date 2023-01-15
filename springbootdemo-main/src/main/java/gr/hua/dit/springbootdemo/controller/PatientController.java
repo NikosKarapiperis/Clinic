@@ -28,7 +28,15 @@ public class PatientController {
     @Autowired
     private AppointmentDAO appointmentDAO;
 
-
+    
+    //See all patients
+    @GetMapping("/getAll")
+    @PreAuthorize("hasRole('ADMIN')")
+    List<Patient> getAll(){
+        return patientDAO.findAll();
+    }
+    
+    //Create a patient
     @PostMapping("")
     @PreAuthorize("hasRole('ADMIN')")
     public Patient save(@RequestBody Patient patient){
@@ -37,16 +45,34 @@ public class PatientController {
         return patient;
     }
 
+    //Delete a patient
     @DeleteMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     Patient delete(@PathVariable("id") int id){
         patientDAO.delete(id);
         return null;
     }
+    
+    //Update-edit a patient
+    @PutMapping("/edit-patient/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Patient> updatePatient(@PathVariable int id, @RequestBody Patient patientDetails){
+        Patient updatePatient = patientDAO.findById(id);
 
+        //update details of doctor
+        updatePatient.setFirstName(patientDetails.getFirstName());
+        updatePatient.setLastName(patientDetails.getLastName());
+        updatePatient.setEmail(patientDetails.getEmail());
+
+        //save updates
+        patientDAO.save(updatePatient);
+
+        return ResponseEntity.ok(updatePatient);
+    }
+
+    //Add a doctor to a patient
     @PostMapping("{pid}/doctors")
     @PreAuthorize("hasRole('PATIENT')")
-    //method for add a doctor in patient
     Doctors addDoctor(@PathVariable int pid, @RequestBody Doctors doctors){
         int doctorId = doctors.getId();//find the id of doctor
         Patient patient = patientDAO.findById(pid);//find the id of patient from method findById
@@ -72,6 +98,7 @@ public class PatientController {
             return doctors1;
     }
 
+  //Book-save an appointment
   @PostMapping("/{pid}/appointment")//method for patient to book an appointment
   @PreAuthorize("hasRole('PATIENT') OR hasRole('SECRETARY')")
   public Appointment setAppointment(@PathVariable int pid,@RequestBody Appointment appointment){
@@ -91,7 +118,7 @@ public class PatientController {
       return appointment;
   }
 
-    //Method for patient to cancel an appointment
+    //Cancel an appointment
     @DeleteMapping("/{pid}/cancelAppointment/{aid}")
     @PreAuthorize("hasRole('PATIENT') OR hasRole('SECRETARY')")
     public Appointment cancelAppointment(@PathVariable("aid") int aid, @PathVariable("pid") int pid){
@@ -125,25 +152,6 @@ public class PatientController {
         Patient patient = patientDAO.findById(pid);
         return patient.getAppointmentList();
     }
-
-
-    //Method for Admin to update a patient
-    @PutMapping("/edit-patient/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Patient> updatePatient(@PathVariable int id, @RequestBody Patient patientDetails){
-        Patient updatePatient = patientDAO.findById(id);
-
-        //update details of doctor
-        updatePatient.setFirstName(patientDetails.getFirstName());
-        updatePatient.setLastName(patientDetails.getLastName());
-        updatePatient.setEmail(patientDetails.getEmail());
-
-        //save updates
-        patientDAO.save(updatePatient);
-
-        return ResponseEntity.ok(updatePatient);
-    }
-
 
 }
 
