@@ -51,25 +51,26 @@ public class PatientController {
         int doctorId = doctors.getId();//find the id of doctor
         Patient patient = patientDAO.findById(pid);//find the id of patient from method findById
 
+        //if patient does not exist, throw message error
         if(patient == null){
-            //if patient does not exist, throw an error
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "entity not found"
+                    HttpStatus.NOT_FOUND, "Patient not found"
             );
         }
 
-        //if doctor already exist
-        if(doctorId != 0 ){
+        //if doctor does not exist, throw message error
+        if(doctors ==null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Doctor not found"
+            );
+        }
+
+        //if patient and doctor exist
             Doctors doctors1 = doctorDAO.findById(doctorId);//find doctor
             patient.setDoctors(doctors1);//set doctor in patient
             doctorDAO.save(doctors1);
             return doctors1;
-        }
 
-        //if doctor does not exist, we create doctor
-        patient.setDoctors(doctors);
-        doctorDAO.save(doctors);
-        return doctors;
     }
 
   @PostMapping("/{pid}/appointment")//method for patient to book an appointment
@@ -81,10 +82,9 @@ public class PatientController {
 
       if(patient == null) {//if patient with pid not found
           throw new ResponseStatusException(
-                  HttpStatus.NOT_FOUND, "entity not found"
+                  HttpStatus.NOT_FOUND, "Patient not found"
           );
       }
-
 
       patient.addAppointment(appointment);//use addAppointment method for create an appointment and add this in list of appointments
       doctors.addAppointment(appointment);//add this appointment AND in doctor entity because one patient has one doctor.
