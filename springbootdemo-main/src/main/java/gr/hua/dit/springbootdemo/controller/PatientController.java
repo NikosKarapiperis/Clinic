@@ -70,7 +70,6 @@ public class PatientController {
             patient.setDoctors(doctors1);//set doctor in patient
             doctorDAO.save(doctors1);
             return doctors1;
-
     }
 
   @PostMapping("/{pid}/appointment")//method for patient to book an appointment
