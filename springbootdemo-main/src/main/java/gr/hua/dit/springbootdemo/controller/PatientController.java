@@ -31,7 +31,6 @@ public class PatientController {
     
     //See all patients
     @GetMapping("/getAll")
-    @PreAuthorize("hasRole('ADMIN')")
     List<Patient> getAll(){
         return patientDAO.findAll();
     }
