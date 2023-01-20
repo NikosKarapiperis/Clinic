@@ -23,7 +23,7 @@ public class Secretary {
     @Column(name="firstName")
     private String firstName;
 
-    @NotBlank(message = "Please enter the first name")
+    @NotBlank(message = "Please enter the last name")
     @Size(max = 20, message = "Name should not be greater than 20 characters")
     @Column(name="lastName")
     private String lastName;
