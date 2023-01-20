@@ -73,7 +73,7 @@ public class SecretaryController {
         return ResponseEntity.ok(updateSecretary);
     }
     
-     //get secretary by id Rest API
+    //get secretary by id Rest API
     @GetMapping("/{id}")
     public ResponseEntity<Secretary> getSecretaryById(@PathVariable int id){
         Secretary secretary = secretaryRepository.findById(id);
@@ -83,6 +83,12 @@ public class SecretaryController {
             );
         }
         return ResponseEntity.ok(secretary);
+    }
+
+
+    @GetMapping("/getAll")
+    List<Secretary> getAll(){
+        return secretaryRepository.findAll();
     }
 
 
