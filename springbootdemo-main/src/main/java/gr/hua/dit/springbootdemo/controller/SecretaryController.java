@@ -72,8 +72,18 @@ public class SecretaryController {
 
         return ResponseEntity.ok(updateSecretary);
     }
-
-
+    
+     //get secretary by id Rest API
+    @GetMapping("/{id}")
+    public ResponseEntity<Secretary> getSecretaryById(@PathVariable int id){
+        Secretary secretary = secretaryRepository.findById(id);
+        if(secretary==null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "entity not found"
+            );
+        }
+        return ResponseEntity.ok(secretary);
+    }
 
 
 }
