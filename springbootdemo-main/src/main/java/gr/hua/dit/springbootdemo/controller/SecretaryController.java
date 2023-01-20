@@ -55,6 +55,23 @@ public class SecretaryController {
     public List<Appointment> viewSecretaryCalendar(){
         return appointmentDAO.findAll();
     }
+    
+     //method for update secretary
+    @PutMapping("/edit-secretary/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Secretary> updateSecretary(@PathVariable int id, @RequestBody Secretary secretary){
+        Secretary updateSecretary = secretaryRepository.findById(id);
+
+        //update details of secretary
+        updateSecretary.setFirstName(secretary.getFirstName());
+        updateSecretary.setLastName(secretary.getLastName());
+        updateSecretary.setEmail(secretary.getEmail());
+
+        //save updates
+        secretaryRepository.save(updateSecretary);
+
+        return ResponseEntity.ok(updateSecretary);
+    }
 
 
 
