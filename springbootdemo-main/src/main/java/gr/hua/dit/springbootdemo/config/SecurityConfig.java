@@ -44,14 +44,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable()
+         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/api/test/**").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/signin").permitAll()
                 .antMatchers("/doctors/getAll").permitAll()
-                .antMatchers("/patient/**").permitAll()
-                .antMatchers("/appointment/**").permitAll()
+                .antMatchers("/secretary/getAll").permitAll()
+                .antMatchers("/patient/getAll").permitAll()
+                .antMatchers("/secretary/{id}").permitAll()
+                .antMatchers("/doctors/{id}").permitAll()
+                .antMatchers("/patient/{id}").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
