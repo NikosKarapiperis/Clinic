@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface SecretaryRepository extends JpaRepository<Secretary,Integer> {
 
-    //Optional<Secretary> delete(int id);
+    Secretary findById(int id);
 }
