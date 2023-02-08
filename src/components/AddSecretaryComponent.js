@@ -86,7 +86,7 @@ const AddSecretaryComponent = () => {
                         </div>
 
                         <button className="btn btn-success" onClick = {(e)=> saveOrUpdateSecretary(e)}> Submit</button>
-                        <Link to="/doctors" className="btn btn-danger"> Cancel</Link>
+                        <Link to="/secretary" className="btn btn-danger"> Cancel</Link>
                     </form>
                 </div>
               </div>
