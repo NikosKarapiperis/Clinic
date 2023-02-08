@@ -29,7 +29,7 @@ const AddDoctorComponent = () => {
       DoctorService.save(doctor).then((response)=>{
         console.log(response.data)
         
-        history("/");
+        history("/doctors");
   
       }).catch(error => {
           console.log(error)
