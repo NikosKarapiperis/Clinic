@@ -31,6 +31,9 @@ const AddSecretaryComponent = () => {
         history("/secretary");
   
       }).catch(error => {
+          if(error.response.status===405){
+            alert("You can not insert an another secretary because exist already one")
+          }
           console.log(error)
       })
     }
