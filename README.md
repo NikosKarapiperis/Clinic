@@ -14,10 +14,6 @@ Install the dependencies by running:
 
 ### `npm install`
 
-Once the depedencies are installed run:
-
-### `npm start`
-
 In the project directory, now you can run:
 
 ### `npm start`
