@@ -1,6 +1,6 @@
 import React, {useEffect,  useState } from 'react'
 import PatientService from '../services/PatientService'
-import { useParams, useNavigate} from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import DoctorService from '../services/DoctorService'
 import AuthService from "../services/auth.service";
 import SecretaryService from '../services/SecretaryService'
@@ -66,7 +66,7 @@ const ListAppointmentComponent = () => {
       if(showPatient){
         getAllAppointments(id);
       }else if(showSecretary){
-        history("/appointment");
+        window.location.reload();
       }
     }).catch(error =>{
       console.log(error);
