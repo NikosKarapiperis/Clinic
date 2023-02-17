@@ -9,7 +9,6 @@ const ListAppointmentComponent = () => {
 
   const [appointment, setAppointment] = useState([])
   const{id} = useParams();
-  const history = useNavigate()
   const [showPatient, setShowPatient] = useState(false);
   const[showDoctor, setShowDoctor] = useState(false);
   const[showSecretary, setShowSecretary] = useState(false);
