@@ -26,6 +26,9 @@ const ListDoctorsForSelectOneComponent = () => {
     PatientService.addDoctor(id,doctors).then((response) =>{
      history("/patient")
     }).catch(error =>{
+      if(error.response.status===405){
+        alert("You have already selected a personal doctor!")
+      }
       console.log(error);
     })
   }
