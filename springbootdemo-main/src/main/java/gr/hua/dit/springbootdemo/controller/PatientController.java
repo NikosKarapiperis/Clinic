@@ -93,6 +93,13 @@ public class PatientController {
 
         //if patient and doctor exist
             Doctors doctors1 = doctorDAO.findById(doctorId);//find doctor
+
+            if(patient.getDoctors()!=null){
+                throw new ResponseStatusException(
+                        HttpStatus.METHOD_NOT_ALLOWED, "You have already selected a doctor"
+                );
+            }
+
             patient.setDoctors(doctors1);//set doctor in patient
             doctorDAO.save(doctors1);
             return doctors1;
